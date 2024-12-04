@@ -1,37 +1,61 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+﻿import {Tabs} from "expo-router";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import {Text, StyleSheet} from "react-native";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+    return (
+        <>
+            <Tabs
+                screenOptions={{
+                    tabBarActiveTintColor: '#54ff55',
+                    tabBarInactiveTintColor: '#fff',
+                    headerStyle: {
+                        backgroundColor: '#1a1a1a',
+                    },
+                    headerShadowVisible: false,
+                    headerTintColor: '#54ff55',
+                    
+                    tabBarStyle: {
+                        backgroundColor: '#1a1a1a',
+                        borderColor: 'none',
+                    },
+                }}
+            >
 
-  return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
-  );
+                <Tabs.Screen
+                    name="dashboard"
+                    options={{
+                        title: 'Dashboard',
+                        tabBarIcon: ({color, focused}) => (
+                            <Ionicons
+                                name={focused ? 'pie-chart-sharp' : 'pie-chart-outline'}
+                                color={focused ? color : '#ffffff'}
+                                size={24}
+                            />
+                        )
+                    }}
+                />
+
+                <Tabs.Screen
+                    name="settings"
+                    options={{
+                        title: 'Settings',
+                        tabBarIcon: ({color, focused}) => (
+                            <Ionicons
+                                name={focused ? 'information-circle' : 'information-circle-outline'}
+                                color={focused ? color : '#ffffff'}
+                                size={24}
+                            />
+                        )
+                    }}
+                />
+            </Tabs>
+        </>
+    )
 }
+
+const styles = StyleSheet.create({
+    text: {
+        color: '#ffffff',
+    }
+})
